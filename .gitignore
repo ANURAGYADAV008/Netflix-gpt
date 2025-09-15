@@ -26,3 +26,5 @@ dist-ssr
 .env
 *.pem
 id_rsa
+/.firebase
+/src/Utils/Firebase.jsx

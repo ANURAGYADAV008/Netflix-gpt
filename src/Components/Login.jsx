@@ -2,14 +2,26 @@ import Header from "./Header";
 import Footer from "./Footer";
 import { useRef, useState } from "react";
 import ValidationData from "../Utils/validation";
+import { auth } from "../Utils/Firebase";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../Utils/userSlice";
 
 const Login = () => {
+  const navigate=useNavigate()
+  const dispatch=useDispatch();
   const [isSignInForm, setIsSignInForm] = useState(true);
-  const [errormessage,setErrormessage]=useState(null);
+  const [errormessage, setErrormessage] = useState(null);
+  
 
   const email = useRef(null);
   const password = useRef(null);
-  const name=useRef(null);
+  const name = useRef(null);
 
   const handleButtonClick = () => {
     const message = ValidationData(
@@ -17,9 +29,65 @@ const Login = () => {
       password.current?.value,
       name.current?.value
     );
-
     setErrormessage(message);
-    console.log(message); // you can replace with your UI logic
+
+    if (message) return; // stop if validation failed
+
+    if (!isSignInForm) {
+      // ✅ Signup logic
+      createUserWithEmailAndPassword(
+        auth,
+        email.current?.value,
+        password.current?.value
+      )
+        .then((userCredential) => {
+          const user = userCredential.user;
+          console.log("Signed up user ->", user);
+          updateProfile(user,{
+            displayName:name.current?.value,
+            photoURL:"https://avatars.githubusercontent.com/u/150878739?v=4"
+          })
+          .then(()=>{
+          const { uid, email, displayname } = auth.currentUser;
+                          dispatch(addUser({
+                              uid: user.uid,
+                              email: user.email,
+                              displayName: user.displayName
+                          }));
+          navigate("/browse")
+          })
+          .catch((error)=>{
+            setErrormessage(error)
+          })
+        })
+        .catch((error) => {
+          const errCode = error.code;
+          const errorMessage = error.message;
+          if(errorMessage!==""){
+            setErrormessage("Invalid Credientials");
+          }
+          
+        });
+    } else {
+      // ✅ Sign In logic
+      signInWithEmailAndPassword(
+        auth,
+        email.current?.value,
+        password.current?.value
+      )
+        .then((userCredential) => {
+          const user = userCredential.user;
+          console.log("Signed in user ->", user);
+          navigate("/browse");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          if(errorMessage!==""){
+          setErrormessage("Invalid Credientials");
+          }
+        });
+    }
   };
 
   const toggleSignInForm = () => {
@@ -85,17 +153,19 @@ const Login = () => {
             <p className="text-sm text-red-700 font-bold">{errormessage}</p>
 
             <p className="text-sm text-gray-300">
-              {isSignInForm ? "New to Netflix ?" : "Already a user ? "}
+              {isSignInForm ? "New to MovieFlix ?" : "Already a user ? "}
               <span
                 className="text-white cursor-pointer hover:underline"
                 onClick={toggleSignInForm}
               >
                 {isSignInForm ? "Sign Up" : "Sign In"}
-              </span>.
+              </span>
+              .
             </p>
           </form>
         </div>
       </div>
+
       <div>
         <Footer />
       </div>

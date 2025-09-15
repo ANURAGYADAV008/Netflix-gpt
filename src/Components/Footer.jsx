@@ -33,7 +33,7 @@ const Footer = () => {
       </div>
 
       <p className="text-gray-500 text-sm mt-8 text-center">
-        © 2025 Netflix, Inc.
+        © 2025 Movieflix, Inc.
       </p>
     </div>
   )
