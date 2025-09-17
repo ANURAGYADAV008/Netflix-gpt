@@ -24,6 +24,9 @@ If you are developing a production application, we recommend using TypeScript wi
 - signIn User Account
 - Created Our Redux Store with user Slice
 - Implemented Sign out
+ # Fix Bug 
+- Protected User to hardcoded
+  Access Browse page
 
 
 ## Features:

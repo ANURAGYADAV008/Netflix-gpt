@@ -1,7 +1,7 @@
 import Header from "./Header";
 import Footer from "./Footer";
 import { useRef, useState } from "react";
-import useHandleAuth from "../Utils/useHandleAuth";
+import useHandleAuth from "../Utils/UseAuth";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);

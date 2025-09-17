@@ -10,10 +10,13 @@ import { useDispatch } from "react-redux";
 import { addUser } from "../Utils/userSlice";
 import { useNavigate } from "react-router-dom";
 
+const USER_AVATAR = "https://avatars.githubusercontent.com/u/150878739?v=4";
+
+
 const useHandleAuth = (email, password, name) => {
+  const navigate=useNavigate()
   const [errormessage, setErrormessage] = useState(null);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const handleAuth = (isSignInForm) => {
     const message = ValidationData(
@@ -22,40 +25,45 @@ const useHandleAuth = (email, password, name) => {
       name.current?.value
     );
     setErrormessage(message);
-
     if (message) return;
 
     if (!isSignInForm) {
-      // ✅ Signup
+      // Sign Up
       createUserWithEmailAndPassword(
         auth,
-        email.current?.value,
-        password.current?.value
+        email.current.value,
+        password.current.value
       )
-        .then((userCredential) => {
+        .then(async (userCredential) => {
           const user = userCredential.user;
+          await updateProfile(user, {
+            displayName: name.current.value,
+            photoURL: USER_AVATAR,
+          });
 
-          updateProfile(user, {
-            displayName: name.current?.value,
-            photoURL: "https://avatars.githubusercontent.com/u/150878739?v=4",
-          })
-            .then(() => {
-              const { uid, email, displayName } = auth.currentUser;
-              dispatch(addUser({ uid, email, displayName }));
-              navigate("/browse");
-            })
-            .catch((error) => setErrormessage(error.message));
+          const { uid, email, displayName, photoURL } = user;
+          dispatch(addUser({ uid, email, displayName, photoURL }));
+          navigate('/browse')
+
         })
-        .catch(() => setErrormessage("Invalid Credentials"));
+        .catch((error) => {
+          setErrormessage(error.code + " - " + error.message);
+        });
     } else {
-      // ✅ Sign In
+      // Sign In
       signInWithEmailAndPassword(
         auth,
-        email.current?.value,
-        password.current?.value
+        email.current.value,
+        password.current.value
       )
-        .then(() => navigate("/browse"))
-        .catch(() => setErrormessage("Invalid Credentials"));
+        .then((userCredential) => {
+          const { uid, email, displayName, photoURL } = userCredential.user;
+          dispatch(addUser({ uid, email, displayName, photoURL }));
+          navigate("/browse")
+        })
+        .catch((error) => {
+          setErrormessage(error.code + " - " + error.message);
+        });
     }
   };
 
@@ -63,3 +71,5 @@ const useHandleAuth = (email, password, name) => {
 };
 
 export default useHandleAuth;
+
+
