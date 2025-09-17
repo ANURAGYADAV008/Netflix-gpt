@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { removeUser } from "../Utils/userSlice";
+import { removeUser,addUser } from "../Utils/userSlice";
 import { signOut } from "firebase/auth";
 import { auth } from "../Utils/Firebase";
 import { useNavigate } from "react-router-dom";
+
 
 const BrowseHeader = () => {
   const navigate=useNavigate();

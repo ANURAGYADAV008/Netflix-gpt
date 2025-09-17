@@ -1,14 +1,17 @@
 import Login from "./Login"
 import Homepage from "./Homepage"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import Browse from "./Browse";
 import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { addUser, removeUser } from "../Utils/userSlice";
+import { addUser,removeUser } from "../Utils/userSlice";
 import { useDispatch } from "react-redux";
 import { auth } from "../Utils/Firebase";
-import Browse from "./Browse";
+import ProtectedRoute from "../Utils/ProtectedRoute";
+
+
 const Body = () => {
-    const dispatch = useDispatch();
+    const dispatch=useDispatch();
     const approuter = createBrowserRouter([
         {
             path: "/",
@@ -16,35 +19,45 @@ const Body = () => {
         },
         {
             path: "/login",
-            element:<Login/>
+            element:(
+                <ProtectedRoute type="public">
+                    <Login/>
+                </ProtectedRoute>
+            )
         },
-        {
+       {
         path:"/browse",
-        element:<Browse/>
-        }
+        element:(
+            <ProtectedRoute type="private">
+                <Browse/>
+            </ProtectedRoute>
+        )
+       }
     ]);
+
+
     useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                const { uid, email, displayname } = user;
-                dispatch(addUser({
-                    uid: user.uid,
-                    email: user.email,
-                    displayName: user.displayName
-                }));
-
-                console.log("Email ye hai->", email);
-            }
-            else {
-                dispatch(removeUser())
-
-            }
-
-        })
-
-
-    }, [])
-
+         const unsubscribe=onAuthStateChanged(auth, (user) => {
+              if (user) {
+                  const { uid, email, displayname } = user;
+                  dispatch(addUser({
+                      uid: user.uid,
+                      email: user.email,
+                      displayName: user.displayName
+                  }));
+  
+                  console.log("Email ye hai->", email);
+              }
+              else {
+                  dispatch(removeUser())
+  
+              }
+  
+          });
+          //unsubscribe when component unmounted
+          return ()=>unsubscribe();
+      }, [])
+  
     return (
         <div>
             <RouterProvider router={approuter} />
