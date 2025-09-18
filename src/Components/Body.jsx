@@ -46,7 +46,6 @@ const Body = () => {
                       displayName: user.displayName
                   }));
   
-                  console.log("Email ye hai->", email);
               }
               else {
                   dispatch(removeUser())

@@ -28,6 +28,8 @@ If you are developing a production application, we recommend using TypeScript wi
 - Protected User to hardcoded
   Access Browse page
 
+- Add All hardcoded url in constant File
+
 
 ## Features:
 - Login/signUp
@@ -51,4 +53,10 @@ If you are developing a production application, we recommend using TypeScript wi
 - Deploy command -`Firebase deploy`
 
 
- 
+ ## Browser Feature
+# Main Container
+ - Video BackGround
+ - Video Title
+# secondary Container
+ - MovieList*n
+ - cards*n
