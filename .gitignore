@@ -27,5 +27,4 @@ dist-ssr
 *.pem
 id_rsa
 /.firebase
-/src/Utils/Firebase.jsx
 /src/Utils/Constants.jsx
