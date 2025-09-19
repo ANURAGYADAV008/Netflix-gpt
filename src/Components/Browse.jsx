@@ -6,10 +6,9 @@ const Browse=()=>{
     //call hooks now
     useNowPlayingMovies();
     return (
-        <div>
+        <div className="">
             <BrowseHeader/>
             <Maincontainer/>
-            <SecondaryContainer/>
             
         </div>
         
