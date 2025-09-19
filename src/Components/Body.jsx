@@ -4,9 +4,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import Browse from "./Browse";
 import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { addUser,removeUser } from "../Utils/userSlice";
+import { addUser,removeUser } from "../Utils/userSlice.jsx";
 import { useDispatch } from "react-redux";
-import { auth } from "../Utils/Firebase";
+import { auth } from "../Utils/Firebase.jsx";
 import ProtectedRoute from "../Utils/ProtectedRoute";
 
 
