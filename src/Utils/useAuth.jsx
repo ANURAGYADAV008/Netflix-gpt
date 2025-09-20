@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ValidationData from "../Utils/validation";
-import { auth } from "../Utils/Firebase";
+import { auth } from "./Firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
