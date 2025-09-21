@@ -13,8 +13,6 @@ const useNowPlayingMovies =()=>{
              console.log("data is",data);
              dispatch(addNowPlayingMovies(data));
 
-
-
         }catch(error){
             console.log("error is->",error)
         }
