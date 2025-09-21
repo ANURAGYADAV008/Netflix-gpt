@@ -1,14 +1,25 @@
 import Buttons from "./button";
-const VideoTitle=({title,overview,vote_average})=>{
-    return(
-        <div className="absolute pt-36 px-6 text-white">
-            <h1 className="text-3xl font-bold w-1/2">{title}</h1>
-            <p className="pt-5 text-lg w-1/3 font-medium px-0.5">{overview}</p>
-            <div className="pt-5">
-            <Buttons/>
-            </div>
 
-        </div>
-    )
-}
+const VideoTitle = ({ title, overview }) => {
+  return (
+    <div className="text-white max-w-xl">
+      {/* Movie Title */}
+      <h1 className="text-5xl font-extrabold drop-shadow-lg leading-tight">
+        {title}
+      </h1>
+
+      {/* Overview */}
+      <p className="mt-4 text-lg text-gray-200 line-clamp-3">
+        {overview}
+      </p>
+
+      {/* Buttons */}
+      <div className="mt-6">
+        <Buttons />
+      </div>
+    </div>
+  );
+};
+
 export default VideoTitle;
+

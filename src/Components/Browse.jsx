@@ -1,15 +1,15 @@
 import BrowseHeader from "./BrowseHeader";
+import { Link } from "react-router-dom";
+import Maincontainer from "../Movies/Maincontainer"
 import useNowPlayingMovies from "../Hooks/useNowPlaying";
-import Maincontainer from "../Movies/Maincontainer";
-import SecondaryContainer from "../Movies/SecondaryContainer";
 const Browse=()=>{
-    //call hooks now
-    useNowPlayingMovies();
+    useNowPlayingMovies()
+
     return (
-        <div className="">
+        <div>
+         
             <BrowseHeader/>
-            <Maincontainer/>
-            
+               <Maincontainer/>
         </div>
         
     )

@@ -1,22 +1,24 @@
-import BackgroundVideo from "./Backgroundvideos"
-import VideoTitle from "./videotitle"
-import { useSelector } from "react-redux"
+import { useSelector } from "react-redux";
+import BackgroundVideo from "./Backgroundvideos";
+import VideoTitle from "./videotitle";
 
-const Maincontainer =()=>{
-    const movies=useSelector((store)=>store.movies?.addNowPlayingMovies?.results)
+const MainContainer = () => {
+    const movies = useSelector((store) => store.movies?.addNowPlayingMovies?.results);
+  console.log("Movie hai",movies)
 
-    if (!movies || movies.length === 0) {
-    return null;
-  }
-    const {title,overview,vote_average,id}=movies[10];
-    
-    return(
-        <div className="absolute top-0 left-0 w-screen h-screen bg-gradient-to-r from-black via-transparent to-transparent z-0">
+  if (!movies) return;
 
-        <VideoTitle title={title} overview={overview} vote_average={vote_average}/>
-        <BackgroundVideo id={id}/>
+  const mainMovie = movies[1];
+  console.log(mainMovie);
 
-        </div>
-    )
-}
-export default Maincontainer
+  const { original_title, overview, id } = mainMovie;
+
+  return (
+    <div className="pt-[30%] bg-black md:pt-0">
+      <VideoTitle title={original_title} overview={overview}/>
+      <BackgroundVideo id={id}/>
+     
+    </div>
+  );
+};
+export default MainContainer;
