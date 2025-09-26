@@ -1,17 +1,25 @@
 import BrowseHeader from "./BrowseHeader";
-import { Link } from "react-router-dom";
 import Maincontainer from "../Movies/Maincontainer"
+import SecondaryContainer from "../Movies/SecondaryContainer"
 import useNowPlayingMovies from "../Hooks/useNowPlaying";
+import {useSelector } from "react-redux";
+import GptSearch from "./gptSeacrch";
 const Browse=()=>{
-    useNowPlayingMovies()
+    const isserch=useSelector((store)=>store.gpt?.showGptSearch)
 
-    return (
-        <div>
-         
-            <BrowseHeader/>
+    useNowPlayingMovies()
+return(
+        (
+            isserch?<div>
+                <BrowseHeader/>
+                <GptSearch/>
+            </div>:<div>
+                <BrowseHeader/>
                <Maincontainer/>
-        </div>
+               <SecondaryContainer/>
+            </div>
+        )
         
-    )
+)
 }
 export default Browse;

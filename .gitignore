@@ -28,3 +28,4 @@ dist-ssr
 id_rsa
 /.firebase
 /src/Utils/Constants.jsx
+/src/Utils/Firebase.js

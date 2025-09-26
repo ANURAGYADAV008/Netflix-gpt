@@ -2,19 +2,19 @@ import Buttons from "./button";
 
 const VideoTitle = ({ title, overview }) => {
   return (
-    <div className="text-white max-w-xl">
+    <div className=" aspect-video text-white absolute top-50 ml-4 bg-gradient-to-r">
       {/* Movie Title */}
-      <h1 className="text-5xl font-extrabold drop-shadow-lg leading-tight">
+      <h1 className="text-3xl font-extrabold drop-shadow-lg leading-tight ">
         {title}
       </h1>
 
       {/* Overview */}
-      <p className="mt-4 text-lg text-gray-200 line-clamp-3">
+      <p className="mt-4 text-lg text-white line-clamp-3 font-medium w-130">
         {overview}
       </p>
 
       {/* Buttons */}
-      <div className="mt-6">
+      <div className="mt-4">
         <Buttons />
       </div>
     </div>

@@ -11,7 +11,7 @@ Currently, two official plugins are available:
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
 
-## Nrtflix-Gpt
+## Netflix-Gpt
 - create React app
 - configured Tailwindcss
 - Header
@@ -24,6 +24,9 @@ If you are developing a production application, we recommend using TypeScript wi
 - signIn User Account
 - Created Our Redux Store with user Slice
 - Implemented Sign out
+- Created A Custom Hooks
+- Build Browse Page 
+- Get Now Playing Movies From Tmdb 
  # Fix Bug 
 - Protected User to hardcoded
   Access Browse page
