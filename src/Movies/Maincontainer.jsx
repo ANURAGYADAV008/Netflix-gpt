@@ -1,24 +1,24 @@
 import { useSelector } from "react-redux";
 import BackgroundVideo from "./Backgroundvideos";
 import VideoTitle from "./videotitle";
-
 const MainContainer = () => {
-    const movies = useSelector((store) => store.movies?.addNowPlayingMovies?.results);
-  console.log("Movie hai",movies)
+  const movies = useSelector(
+    (store) => store.movies?.addNowPlayingMovies?.results
+  );
 
-  if (!movies) return;
+  if (!movies || movies.length === 0) return <p>Loading...</p>;
 
-  const mainMovie = movies[1];
-  console.log(mainMovie);
-
+  const mainMovie = movies[5] || movies[0];
   const { original_title, overview, id } = mainMovie;
 
   return (
-    <div className="pt-[30%] bg-black md:pt-0">
-      <VideoTitle title={original_title} overview={overview}/>
-      <BackgroundVideo id={id}/>
-     
+    <div>
+      {/* Hero Section */}
+      <div className="w-full h-full bg-black top-0">
+        <BackgroundVideo id={id} />
+        <VideoTitle title={original_title} overview={overview}/>
+      </div>
     </div>
   );
 };
-export default MainContainer;
+export default MainContainer
