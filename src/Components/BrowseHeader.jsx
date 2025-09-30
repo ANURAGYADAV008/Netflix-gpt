@@ -29,7 +29,7 @@ const BrowseHeader = () => {
     <div className="absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex flex-col md:flex-row justify-between ">
       <img className="w-44 mx-auto md:mx-0 " src={LOGO} alt="logo" />
         <div className="flex p-2 justify-between pl-0">
-          <button  onClick ={handleGpt} className="font-bold text-white bg-purple-800 h-12 w-27 rounded-md mr-5 text-center">
+          <button  onClick={handleGpt} className="font-bold text-white bg-purple-800 h-12 w-27 rounded-md mr-5 text-center">
             Gpt Search
     
           </button>
