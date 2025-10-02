@@ -28,5 +28,7 @@ dist-ssr
 id_rsa
 .firebase
 .env
+.txt
+.password.txt
 /src/Utils/Constants.jsx
 /src/Utils/Firebase.js
